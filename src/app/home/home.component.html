@@ -1,0 +1,51 @@
+<form [formGroup]="classForm" (ngSubmit)="generate(classForm.value)">
+  <div class="form-container">
+    <div class="row columns">
+      <h1>Generate CRUD here !</h1>
+      <label>Package Name
+        <input formControlName="packageName" />
+      </label>
+      <div class="alert" *ngIf="!classForm.controls['packageName'].valid && classForm.controls['packageName'].touched">{{titleAlert}}
+      </div>
+      <label>Class Name
+        <input formControlName="className" />
+      </label>
+      <div class="alert" *ngIf="!classForm.controls['className'].valid && classForm.controls['className'].touched">{{titleAlert}}
+      </div>
+      <form [formGroup]="attForm" (ngSubmit)="addAttr(attForm.value)">
+        <h3>Add attribute</h3>
+        <label>attribute Name
+          <input formControlName="attName" />
+        </label>
+        <div class="alert" *ngIf="!attForm.controls['attName'].valid && attForm.controls['attName'].touched">{{titleAlert}}
+      </div>
+        <label>attribute type
+          <select formControlName="attType">
+            <option>Integer</option>
+            <option>String</option>
+            <option>Boolean</option>
+            <option>Date</option>
+            <option>Long</option>
+            <option>Float</option>
+            <option>Double</option>
+            <option>DateTime</option>
+          </select>
+        </label>
+        <div class="alert" *ngIf="!attForm.controls['attType'].valid && attForm.controls['attType'].touched">{{titleAlert}}
+      </div>
+        <input type="submit" value="Add" class="button expaned" [disabled]="!attForm.valid" />
+        <label>__________________________________________</label>
+        <ul>
+          <li *ngFor="let a of attrs">
+            {{a.attName}} : {{a.attType}}
+          </li>
+        </ul>
+        <label>__________________________________________</label>
+      </form>
+    </div>
+  </div>
+  <input type="submit" value="Generate" class="button expaned" [disabled]="!classForm.valid" />
+</form>
+<label>with login query ?
+  <input [(ngModel)]="isChecked" type="checkbox" /> </label>
+
